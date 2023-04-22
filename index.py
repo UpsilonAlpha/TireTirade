@@ -37,7 +37,7 @@ bar.update_layout(title_x=0.5)
 Plotly.react('bar', JSON.parse(bar.to_json()))
 
 #What is the average car tyre made of?
-pie = px.sunburst(tire_data, values="Kilograms", names="Materials",parents="Parent",template=template, title="What are tires made of?")
+pie = px.sunburst(tire_data, values="Kilograms", names="Materials",parents="Parent",template=template, branchvalues="remainder", title="What are tires made of?")
 pie.update_layout(title_x=0.41)
 Plotly.react('pie', JSON.parse(pie.to_json()))
 
