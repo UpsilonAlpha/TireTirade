@@ -11,13 +11,46 @@
     <py-config>
       packages = ["pandas", "plotly"]
     </py-config>
-    
 
+    <button id = "show_output" class = "btn btn-primary" type = "submit" py-click="show_output">Show Output</button>
+    <div id="output_div" style="margin-top: 10px;margin-bottom: 10px;"></div>
+   
     <py-script src="./index.py">
     </py-script>
 
+      <h1>Why tires are so bad for the environment</h1>
+      
+      <p>
+        Have you ever heard that “whoosh!” sound cars make?
+        
+        That’s the sound of your tires scraping on roads. Here’s why that has big consequences, as well as what you can do to help.
+        <br><br><br>
+      </p>
+      
+      <h2>Part 1: Pollution</h2>
+                    
     <div id="bar"></div>
+      <p>
+        Humans as a species, throw out on average, 3 MILLION tires every DAY<sup>1</sup>. For reference that’s 35 tires every second.
+          
+          Luckily, there are lots of companies working on recycling tires!<sup>2</sup> Only- they’re just recycling what’s left of the tire after it’s been used. While getting your tires replaced have you ever noticed how a good chunk of your old tires is just... gone? In a best case scenario 80% of the tread has been removed before tyres are replaced<sup>3</sup>. So where did all that extra tire go? Or more accurately where didn’t it go?
+          
+          A typical passenger tire is composed of 30 different types of synthetic rubber. When driving these rubber particles are sprayed into the air! It’s mixes into the soil! It’s washed into rivers, lakes and into the ocean<sup>4</sup>! Mother nature is getting tired because everywhere there’s a road, there’s toxic rubber being sprayed into the environment, and no, electric cars don’t solve this problem.
+          
+          We can’t just look at tires though, we have to look at the infrastructure that supports them. Roads. These asphalt strips are constantly degrading and need to be resealed every decade, and completely rebuilt every 30 years<sup>5</sup>. For a particularly bad example, America spends 231 billion dollars on roads each year<sup>6</sup>. Money that could be going to say… public transport, social housing or stopping CO2 getting into our atmosphere.
+          <br><br><br>
+      </p>
+      
     <div id="pie"></div>
+    <br><br><br>
+      <h2>Part 2: Efficiency</h2>
+      <p>
+        Tires are designed to be large and grippy. This is called static friction and it’s an absolute necessity because without this, cars would slip and kill a lot of people. More than they already do.
+
+        So, the static friction of tires make cars great at starting and stopping, but of course there’s a downside, when they start moving they generate a whole lot of friction slowing them down. This is kinetic friction also known as “rolling resistance” and this friction uses up energy that is then wasted as heat and noise<sup>7</sup> .
+
+        The average engine is about 40% efficient. Pretty terrible already. When driving however, up to 30% of the energy that makes it to the wheels is used then used up because of tires<sup>8</sup>, which means electric cars aren’t immune to this either. The range listed on brand new electric cars were likely calculated using ultra-low rolling resistance tires in ideal conditions. The electricity wasted by tires could be used to decarbonise other sectors of the economy, but right now all this extra energy and by extension CO2 is just wasted as heat and… noise pollution.
+      </p>
     <div id="sankey"></div>
 
   </body>

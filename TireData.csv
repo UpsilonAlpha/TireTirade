@@ -1,6 +1,12 @@
-﻿System,Tonnes,Materials,Kilograms
-Soil,5871,Synthetic rubber,2.1995
-Air,1040,Natural rubber,1.6575
-Rivers,1043,"Antioxidant, Antiozonant and Curing Agents",0.911
-Sewage,814,Steel fiber and Textiles,1.285
-,,Fillers,2.872
+﻿System,Tonnes,Parent,Materials,Kilograms
+Soil,5871,Rubber,Synthetic,2.1995
+Air,1040,Rubber,Natural,1.6575
+Rivers,1043,Protection,Antioxidants,0.256117647
+Sewage,814,Protection,Antiozonants,0.365882353
+,,Hardeners,Stearic acid,0.088
+,,Hardeners,Zinc oxide,0.169
+,,Hardeners,Sulfur,0.112
+,,Reinforcement,Steel fiber,0.87
+,,Reinforcement,Textiles,0.415
+,,Fillers,Carbon Black,2.0055
+,,Fillers,Silica,0.8665
