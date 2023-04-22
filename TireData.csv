@@ -1,13 +1,18 @@
 ﻿System,Tonnes,Parent,Materials,Kilograms
 Soil,5871,,,2
-Air,1040,Rubber,Synthetic,2.1995
-Rivers,1043,Rubber,Natural,1.6575
-Sewage,814,Protection,Antioxidants,0.256117647
+Air,1040,,Rubber,3.857
+Rivers,1043,Rubber,Synthetic,2.1995
+Sewage,814,Rubber,Natural,1.6575
+,,,Protection,0.622
+,,Protection,Antioxidants,0.256117647
 ,,Protection,Antiozonants,0.365882353
+,,,Hardeners,0.369
 ,,Hardeners,Stearic acid,0.088
 ,,Hardeners,Zinc oxide,0.169
 ,,Hardeners,Sulfur,0.112
+,,,Reinforcement,1.285
 ,,Reinforcement,Steel fiber,0.87
 ,,Reinforcement,Textiles,0.415
+,,,Fillers,2.872
 ,,Fillers,Carbon Black,2.0055
 ,,Fillers,Silica,0.8665
