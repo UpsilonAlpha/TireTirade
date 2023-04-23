@@ -55,8 +55,7 @@ for i in range(1,10):
     d = fft(b[i])
     c.insert(i,f"data{i}",np.abs(d[:int(len(d)/2)-1]))
 
-#fig = px.scatter(c, y=c.columns, animation_frame=0, log_x=True, )
-fig = go.Figure(go.Scatter(y=c.iloc[:,1]))
-fig.show()
-fig.update(y=c.iloc[:,2])
+fig = px.line(c, y=(c.iloc[:,1]/100000), log_x=True)
+fig.update_layout(xaxis_title="Frequency (Hz)", yaxis_title="Amplitude (dB)")
+#fig = go.Figure(go.Scatter(y=c.iloc[:,1]), log_x=True)
 fig.show()

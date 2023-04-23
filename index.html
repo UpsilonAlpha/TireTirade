@@ -11,9 +11,12 @@
     <py-config>
       packages = ["pandas", "plotly"]
     </py-config>
-
+<!--
     <button id = "show_output" class = "btn btn-primary" type = "submit" py-click="show_output">Show Output</button>
     <div id="output_div" style="margin-top: 10px;margin-bottom: 10px;"></div>
+
+-->
+
    
     <py-script src="./index.py">
     </py-script>
@@ -42,6 +45,7 @@
       </p>
       
     <div id="pie"></div>
+    <p style="width:100px; margin:0 auto;">(click on me!)</p>
     <br><br><br>
       <h2>Part 2: Efficiency</h2>
       <p>
@@ -52,6 +56,20 @@
         The average engine is about 40% efficient. Pretty terrible already. When driving however, up to 30% of the energy that makes it to the wheels is used then used up because of tires<sup>8</sup>, which means electric cars aren’t immune to this either. The range listed on brand new electric cars were likely calculated using ultra-low rolling resistance tires in ideal conditions. The electricity wasted by tires could be used to decarbonise other sectors of the economy, but right now all this extra energy and by extension CO2 is just wasted as heat and… noise pollution.
       </p>
     <div id="sankey"></div>
+    <br><br><br>
+    <h2>Part 3: Noise</h2>
+    <p>
+When you think about the loudest part of the car most people would say it’s the engine right?
 
+One of the big selling points for electric cars is how quiet they are but- the noise is the same to everyone else outside of a soundproofed vehicle. The rolling noise of the tires becomes louder than the propulsion noise of the engine at speeds over 55kmph. So, most of the time it’s the tires that are to blame for why cars are loud.
+
+Believe it or not, this used to be a much bigger problem in the past. That’s because this regular pattern of treads causes the tires to make noise at the same frequency and it was unbearably loud. In order to solve this, the brand-new field of pitch sequence engineering was born. Engineers experimented with different patterns, to take that single loud peak of noise, and distribute it across different frequencies. So modern tires are specifically designed to make white noise.
+
+Unfortunately, this second type of noise can be seriously detrimental to health. It causes sleep disturbances so tires might literally be why you’re always tired. It’s also been shown to increase anxiety, especially in children! And because of this it’s significantly increased the rate of chronic heart failure, the number 1 killer of humans.
+
+So, while modern tires are less loud, the total amount of noise, (the area under the curve) is still the same. The same amount of energy is wasted, and the same amount of pollution is sprayed into the environment.
+
+    </p>
+    <img src="https://github.com/UpsilonAlpha/TireTirade/blob/main/fourier.png"></img>
   </body>
 </html>
