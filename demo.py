@@ -50,12 +50,30 @@ e.insert(1, "frame", range(0,9), True)
 e.insert(2, "data", d, True)
 
 '''
-c=pd.DataFrame(range(0,15871))
-for i in range(1,10):
-    d = fft(b[i])
-    c.insert(i,f"data{i}",np.abs(d[:int(len(d)/2)-1]))
+c=pd.DataFrame(range(0,142830))
 
-fig = px.line(c, y=(c.iloc[:,1]/100000), log_x=True)
-fig.update_layout(xaxis_title="Frequency (Hz)", yaxis_title="Amplitude (dB)")
+freqs = []
+e = []
+frames = []
+for i in range(1,10):
+    for num in range(0,15870):
+        freqs.append(num)
+        frames.append(f"Frame{i}")
+    d = fft(b[i])
+    d2 = np.abs(d[:int(len(d)/2)-1])
+    #d3 = sig.savgol_filter(d2, 5, 3)
+    for x in np.abs(d2[:int(len(d2/2)-1)]):
+        e.append(x/20000000)
+    
+
+c.insert(0, "Frequencies", freqs)
+c.insert(1, "Frames", frames)
+c.insert(2, "Values", e)
+c.to_csv("RoadNoise.csv")
+
+fig = px.line(c,x ="Frequencies", y="Values",animation_frame="Frames", log_x=True)
+fig.update_layout(xaxis_title="Frequency (Hz)", yaxis_title="Relative Amplitude",yaxis_range=[0,1])
+fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 666
+fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 666
 #fig = go.Figure(go.Scatter(y=c.iloc[:,1]), log_x=True)
 fig.show()
