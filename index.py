@@ -11,6 +11,12 @@ tire_data = pd.read_csv(open_url(url1))
 url2 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/RoadNoise.csv")
 road_noise = pd.read_csv(open_url(url2))
 
+url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
+percent_recycling = pd.read_csv(open_url(url2))
+
+url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
+gjson = JSON.load(open_url(url4))
+
 template = "plotly"
 
 def show_output(*args, **kwargs):
@@ -66,3 +72,41 @@ fourier.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 666
 fourier.update_layout(title_text="What does the noise profile of a car look like?", title_x=0.5, template=template, xaxis_title="Frequency (Hz)", yaxis_title="Amplitude (dB)")
 Plotly.react('fourier', JSON.parse(fourier.to_json()))
 
+
+
+
+
+recycling = df[df["Management"]=="Recycling"]
+burned = df[df["Management"]=="Energy from waste facility"]
+landfill = df[df["Management"]=="Landfill"]
+chloropleth = px.choropleth(df, geojson=gjson, locations = recycling.index, color=recycling["Tonnes"], animation_frame=recycling["Year"], center=dict(lat=-26.5 , lon=135.5))
+chloropleth.update_geos(fitbounds="locations")
+
+chloropleth.update_layout(
+    updatemenus=[
+        dict(
+            type = "buttons",
+            direction = "left",
+            buttons=list([
+                dict(
+                    args=["color", recycling["Tonnes"]],
+                    label="Recycling",
+                    method="restyle"
+                ),
+                dict(
+                    args=["color", landfill["Tonnes"]],
+                    label="Landfill",
+                    method="restyle"
+                )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            x=0.11,
+            xanchor="left",
+            y=1.1,
+            yanchor="top"
+        ),
+    ]
+)
+
+Plotly.react('chloropleth', JSON.parse(chloropleth.to_json()))

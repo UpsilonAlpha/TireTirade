@@ -3,13 +3,103 @@ import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.signal as sig
-from scipy.fftpack import fft
-from scipy.io import wavfile
+import geopandas as gpd
+import pyproj
+import json
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from shapely import wkt
 
+MAPBOX_ACESSTOKEN = "pk.eyJ1IjoiZm9yc3dvcm4iLCJhIjoiY2xnd2NpemVpMmt2bzNsbGg5ZHdtcDdqbCJ9.71Qy9AEmPQd48pDPbJ4quw"
+
+
+'''
+df = pd.read_csv("TireRecycling.csv")
+df = df[["Year", "Jurisdiction", "Type", "Stream", "Management", "Tonnes"]]
+df = df[df["Type"] == "Tyres (T140)"]
+df = df[df["Stream"]=="Total"]
+df = df.replace(',','', regex=True)
+df['Tonnes'] = df['Tonnes'].apply(pd.to_numeric)
+df = df[df['Tonnes'] > 0]
+df = df[df['Management'] != "Other disposal"]
+df = df[::-1]
+
+for i in range(len(df["Year"])):
+    year = df.iloc[i,0]
+    df.iloc[i,0] = year[5:9]
+print(df['Year'])
+df['Year'] = df['Year'].apply(pd.to_numeric)
+
+recycled = df[df["Management"] == "Recycling"]
+burned = df[df["Management"] == "Energy from waste facility"]
+landfill = df[df["Management"] == "Landfill"]
+
+percent_recycled = ((recycled["Tonnes"].values)/(recycled["Tonnes"].values + burned["Tonnes"].values+landfill["Tonnes"].values))*100
+percent_burned = ((burned["Tonnes"].values)/(recycled["Tonnes"].values + burned["Tonnes"].values+landfill["Tonnes"].values))*100
+percent_landfill = ((landfill["Tonnes"].values)/(recycled["Tonnes"].values + burned["Tonnes"].values+landfill["Tonnes"].values))*100
+
+
+recycled["Tonnes"] = percent_recycled
+burned["Tonnes"] = percent_burned
+landfill["Tonnes"] = percent_landfill
+
+df[df["Management"] == "Recycling"] = recycled
+df[df["Management"] == "Energy from waste facility"] = burned
+df[df["Management"] == "Landfill"] = landfill
+
+df.to_csv("PercentRecycling.csv")
+
+
+line = px.line(df[df["Management"]=="Recycling"], y="Tonnes", x="Year", color="Jurisdiction" )
+line.show()
+'''
+df = pd.read_csv("PercentRecycling.csv")
+'''
+df["geometry"] = gpd.GeoSeries()
+states = gpd.read_file("STE_2021_AUST_GDA2020.shp")
+print(states)
+for i in range(len(df["Jurisdiction"])):
+    
+    match df.iloc[i,2]:
+        case "NSW":
+            df.iloc[i, 7] = states.iloc[0, 8]
+        case "Vic":
+            df.iloc[i, 7] = states.iloc[1, 8]
+        case "Qld":
+            df.iloc[i, 7] = states.iloc[2, 8]
+        case "SA":
+            df.iloc[i, 7] = states.iloc[3, 8]
+        case "WA":
+            df.iloc[i, 7] = states.iloc[4, 8]
+        case "Tas":
+            df.iloc[i, 7] = states.iloc[5, 8]
+        case "NT":
+            df.iloc[i, 7] = states.iloc[6, 8]
+        case "ACT":
+            df.iloc[i, 7] = states.iloc[7, 8]
+
+
+df = df[["geometry", "Year", "Jurisdiction", "Management", "Tonnes"]]
+
+
+
+gdf = gpd.GeoDataFrame(df)
+gpd.GeoDataFrame.set_geometry(gdf, gdf["geometry"])
+gdf.crs = "EPSG:7844"
+
+gdf.to_crs(epsg=4326)
+gjson = gdf.__geo_interface__
+
+with open('States.geojson', 'w') as fp:
+    json.dump(gjson, fp)
+'''
+with open ("States.geojson",'r') as infile:
+    gjson = json.load(infile)
+
+
+'''
 fs, wav = wavfile.read("RoadNoise.wav")
 a = wav.T[0]
-'''
+
 b = fft(a) # calculate fourier transform (complex numbers list)
 c = int(len(b)/4)  # you only need half of the fft list (real signal symmetry)
 
@@ -21,10 +111,10 @@ y = sig.savgol_filter(b, 100, 3)
 fig = px.line(y=abs(y[:(c-1)]), x=frqLabel, log_x=True)
 fig.update_layout(xaxis_range=[1,4])
 fig.show()
-'''
+
 
 b = np.array_split(a, 10)
-'''
+
 i=0
 for frame in b:
     frame = fft(frame)
@@ -49,7 +139,7 @@ e=pd.DataFrame(range(0,9))
 e.insert(1, "frame", range(0,9), True)
 e.insert(2, "data", d, True)
 
-'''
+
 c=pd.DataFrame(range(0,142830))
 
 freqs = []
@@ -77,3 +167,4 @@ fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 666
 fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 666
 #fig = go.Figure(go.Scatter(y=c.iloc[:,1]), log_x=True)
 fig.show()
+'''
