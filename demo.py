@@ -46,7 +46,7 @@ df[df["Management"] == "Recycling"] = recycled
 df[df["Management"] == "Energy from waste facility"] = burned
 df[df["Management"] == "Landfill"] = landfill
 
-df[df["Management"]=="Recycling"].to_csv("PercentRecycling.csv")
+df.to_csv("PercentRecycling.csv")
 
 '''
 line = px.line(df[df["Management"]=="Recycling"], y="Tonnes", x="Year", color="Jurisdiction" )
