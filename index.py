@@ -12,7 +12,7 @@ tire_data = pd.read_csv(open_url(url1))
 url2 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/RoadNoise.csv")
 road_noise = pd.read_csv(open_url(url2))
 
-url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
+url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/CleanRecycling.csv")
 df = pd.read_csv(open_url(url3))
 
 url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
@@ -43,7 +43,7 @@ document.getElementById("button").addEventListener("click", function_proxy)
 
 #Where do degraded tires go?
 bar = px.bar(tire_data, x="System", y="Tonnes", template=template,title="Where do tire microplastics enter the environment?")
-bar.update_layout(title_x=0.5)
+bar.update_layout(title_x=0.5, error_y=dict(type='percent', value=10, visible=True))
 Plotly.react('bar', JSON.parse(bar.to_json()))
 
 #What is the average car tyre made of?
@@ -56,7 +56,7 @@ Plotly.react('pie', JSON.parse(pie.to_json()))
 sankey = go.Figure(go.Sankey(
     arrangement="snap",
     node={"label":['Transmission','Wheels','Transmission loss','Rolling resistance', 'Air resistance', 'Braking'], 
-                                "x":[0,0.1,0,0.2,0.2,0.2],
+                                "x":[0,0.1,0.1,0.2,0.2,0.2],
                                 "y":[0, 0, -0.1,0,0,0]},
                                 link={"source":[0,0,1,1,1],
                                 "target":[1,2,3,4,5],

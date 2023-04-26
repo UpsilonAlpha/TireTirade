@@ -29,6 +29,8 @@ for i in range(len(df["Year"])):
 print(df['Year'])
 df['Year'] = df['Year'].apply(pd.to_numeric)
 
+df = df[df["Year"]>2009]
+'''
 recycled = df[df["Management"] == "Recycling"]
 burned = df[df["Management"] == "Energy from waste facility"]
 landfill = df[df["Management"] == "Landfill"]
@@ -45,14 +47,15 @@ landfill["Tonnes"] = percent_landfill
 df[df["Management"] == "Recycling"] = recycled
 df[df["Management"] == "Energy from waste facility"] = burned
 df[df["Management"] == "Landfill"] = landfill
-
-df.to_csv("PercentRecycling.csv")
+'''
+df.to_csv("CleanRecycling.csv")
 
 '''
 line = px.line(df[df["Management"]=="Recycling"], y="Tonnes", x="Year", color="Jurisdiction" )
 line.show()
 
 df = pd.read_csv("PercentRecycling.csv")
+'''
 
 df["geometry"] = gpd.GeoSeries()
 states = gpd.read_file("STE_2021_AUST_GDA2020.shp")
@@ -91,7 +94,7 @@ gjson = gdf.__geo_interface__
 
 with open('States.geojson', 'w') as fp:
     json.dump(gjson, fp)
-
+'''
 with open ("States.geojson",'r') as infile:
     gjson = json.load(infile)
 
