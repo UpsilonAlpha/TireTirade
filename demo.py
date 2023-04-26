@@ -12,7 +12,7 @@ from shapely import wkt
 MAPBOX_ACESSTOKEN = "pk.eyJ1IjoiZm9yc3dvcm4iLCJhIjoiY2xnd2NpemVpMmt2bzNsbGg5ZHdtcDdqbCJ9.71Qy9AEmPQd48pDPbJ4quw"
 
 
-'''
+
 df = pd.read_csv("TireRecycling.csv")
 df = df[["Year", "Jurisdiction", "Type", "Stream", "Management", "Tonnes"]]
 df = df[df["Type"] == "Tyres (T140)"]
@@ -46,14 +46,14 @@ df[df["Management"] == "Recycling"] = recycled
 df[df["Management"] == "Energy from waste facility"] = burned
 df[df["Management"] == "Landfill"] = landfill
 
-df.to_csv("PercentRecycling.csv")
+df[df["Management"]=="Recycling"].to_csv("PercentRecycling.csv")
 
-
+'''
 line = px.line(df[df["Management"]=="Recycling"], y="Tonnes", x="Year", color="Jurisdiction" )
 line.show()
-'''
+
 df = pd.read_csv("PercentRecycling.csv")
-'''
+
 df["geometry"] = gpd.GeoSeries()
 states = gpd.read_file("STE_2021_AUST_GDA2020.shp")
 print(states)
@@ -91,12 +91,12 @@ gjson = gdf.__geo_interface__
 
 with open('States.geojson', 'w') as fp:
     json.dump(gjson, fp)
-'''
+
 with open ("States.geojson",'r') as infile:
     gjson = json.load(infile)
 
 
-'''
+
 fs, wav = wavfile.read("RoadNoise.wav")
 a = wav.T[0]
 
