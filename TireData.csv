@@ -1,18 +1,18 @@
-﻿System,Tonnes,Parent,Materials,Kilograms
-Soil,5871,,Tire,0
-Air,1040,Tire,Rubber,0
-Rivers,1043,Rubber,Synthetic,2.1995
-Sewage,814,Rubber,Natural,1.6575
-,,Tire,Protection,0
-,,Protection,Antioxidants,0.256117647
-,,Protection,Antiozonants,0.365882353
-,,Tire,Hardeners,0
-,,Hardeners,Stearic acid,0.088
-,,Hardeners,Zinc oxide,0.169
-,,Hardeners,Sulfur,0.112
-,,Tire,Reinforcement,0
-,,Reinforcement,Steel fiber,0.87
-,,Reinforcement,Textiles,0.415
-,,Tire,Fillers,0
-,,Fillers,Carbon Black,2.0055
-,,Fillers,Silica,0.8665
+﻿System,Tonnes,Parent,Materials,Kilograms,City,Method,Percentage
+Soil,5871,,Tire,0,,,
+Air,1040,Tire,Rubber,0,,,
+Rivers,1043,Rubber,Synthetic,2.1995,,,
+Sewage,814,Rubber,Natural,1.6575,,,
+,,Tire,Protection,0,,,
+,,Protection,Antioxidants,0.256117647,,,
+,,Protection,Antiozonants,0.365882353,,,
+,,Tire,Hardeners,0,,,
+,,Hardeners,Stearic acid,0.088,,,
+,,Hardeners,Zinc oxide,0.169,,,
+,,Hardeners,Sulfur,0.112,,,
+,,Tire,Reinforcement,0,,,
+,,Reinforcement,Steel fiber,0.87,,,
+,,Reinforcement,Textiles,0.415,,,
+,,Tire,Fillers,0,,,
+,,Fillers,Carbon Black,2.0055,,,
+,,Fillers,Silica,0.8665,,,

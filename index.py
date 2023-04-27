@@ -15,12 +15,11 @@ road_noise = pd.read_csv(open_url(url2))
 #url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
 #df = pd.read_csv(open_url(url3))
 
-
-
 url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/CleanRecycling.csv")
 df = pd.read_csv(open_url(url4))
 recycling = df[df["Management"]=="Recycling"]
 landfill = df[df["Management"]=="Landfill"]
+
 url5 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
 gjson = json.loads(open_url(url5).getvalue())
 
@@ -84,7 +83,7 @@ Plotly.react('fourier', JSON.parse(fourier.to_json()))
 
 
 
-chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
+chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color=recycling["Tonnes"], animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
 chloropleth.update_geos(fitbounds="locations")
 
 chloropleth.update_layout(
@@ -114,8 +113,9 @@ chloropleth.update_layout(
         ),
     ]
 )
+
 Plotly.react('chloropleth', JSON.parse(chloropleth.to_json()))
 
-area = px.area(landfill, y="Landfill", x="Year", color="Jurisdiction")
+area = px.area(landfill, y="Tonnes", x="Year", color="Jurisdiction")
 
 Plotly.react('area', JSON.parse(area.to_json()))

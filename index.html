@@ -90,26 +90,30 @@
     <p>
 Most people would assume the engine is the loudest part of a car. In fact, one of the big selling points for electric cars is how quiet they are. However, noise levels are very similar outside of a soundproofed vehicle. The rolling noise of the tires becomes louder than the the engine at speeds over 30kmph. So, most of the time it’s the tires that are to blame for why cars are loud.
 
-Believe it or not, this used to be a much bigger problem in the past, when tires used to make a high frequency hum.
+Believe it or not, this used to be a much bigger problem in the past, when tires used to make a high frequency hum. This clip was gathered from a car in the 1920s.
 <br><br>
 <audio controls>
   <source src="https://github.com/UpsilonAlpha/TireTirade/blob/main/OldNoise.wav?raw=true" type="audio/wav">
 </audio>
 <br><br>
-That’s because this regular pattern of treads causes the tires to make noise at the same frequency and it was unbearably loud. In order to solve this, the brand-new field of pitch sequence engineering was born. Engineers experimented with different patterns, to take that single loud peak of noise, and distribute it across different frequencies. So modern tires are specifically designed to make white noise.
+That’s because this regular pattern of treads causes the tires to make noise at the same frequency and it was unbearably loud. In order to solve this, the brand-new field of pitch sequence engineering was born. Engineers experimented with different patterns, to take that single loud peak of noise, and distribute it across different frequencies. So modern tires are specifically designed to make white noise. This clip was collected personally using a microphone on Metroad 5 Brisbane.
 <br><br>
 <audio controls>
   <source src="https://github.com/UpsilonAlpha/TireTirade/blob/main/RoadNoise.wav?raw=true" type="audio/wav">
 </audio>
 <br><br>
-Unfortunately, this second type of noise can be seriously detrimental to health. It causes sleep disturbances and might be the reason why you’re always tired. It’s also been shown to increase anxiety, especially in children. Because of these stress-altering effect tire noise has also significantly increased the rate of chronic heart failure, the number 1 killer of humans.
 
-So, while modern tires are less loud, they can still have serious negative health effects.
+The volume of these recordings were first normalized, then a fast fourier transform algorithm was used to extract the frequencies from these recordings. Due to the noisiness of the real world recordings a Savitzky-Golay smoothing algorithm was also applied. This produces a smoother spectrum of the frequencies obtained. The animation below shows the transition between the sharp harmonic sound produced by the 1920s tire to the smooth "white noise" of a modern tire.
+
     </p>
 
     <div id="fourier"></div>
 <br><br><br>
+<p>
+  Unfortunately, this white noise, while less noticable, can be seriously detrimental to health. It causes sleep disturbances and might be the reason why you’re always tired. It’s also been shown to increase anxiety, especially in children. Because of these stress-altering effect tire noise has also significantly increased the rate of chronic heart failure, the number 1 killer of humans.
 
+  So, while modern tires are less "loud", they can still have serious negative health effects.
+</p>
 <h2>A Tireless Future?</h2>
 
 While it may seem like tyres are here to stay, there are still many ohter ways to minimize their negative impacts. One alternative is more frequent use of rail transport. Railway lines don't shed microplastics are they are made using mostly only steel, wood and concrete. Unlike roads they’re also extremely resistant to degradation, lasting many decades on average. Rail infrastructure can also be more easily recycled compared to tyres.
