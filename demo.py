@@ -59,26 +59,26 @@ df = pd.read_csv("PercentRecycling.csv")
 
 df["geometry"] = gpd.GeoSeries()
 states = gpd.read_file("STE_2021_AUST_GDA2020.shp")
-print(states)
+print(df)
 for i in range(len(df["Jurisdiction"])):
     
-    match df.iloc[i,2]:
+    match df.iloc[i,1]:
         case "NSW":
-            df.iloc[i, 7] = states.iloc[0, 8]
+            df.iloc[i, 6] = states.iloc[0, 8]
         case "Vic":
-            df.iloc[i, 7] = states.iloc[1, 8]
+            df.iloc[i, 6] = states.iloc[1, 8]
         case "Qld":
-            df.iloc[i, 7] = states.iloc[2, 8]
+            df.iloc[i, 6] = states.iloc[2, 8]
         case "SA":
-            df.iloc[i, 7] = states.iloc[3, 8]
+            df.iloc[i, 6] = states.iloc[3, 8]
         case "WA":
-            df.iloc[i, 7] = states.iloc[4, 8]
+            df.iloc[i, 6] = states.iloc[4, 8]
         case "Tas":
-            df.iloc[i, 7] = states.iloc[5, 8]
+            df.iloc[i, 6] = states.iloc[5, 8]
         case "NT":
-            df.iloc[i, 7] = states.iloc[6, 8]
+            df.iloc[i, 6] = states.iloc[6, 8]
         case "ACT":
-            df.iloc[i, 7] = states.iloc[7, 8]
+            df.iloc[i, 6] = states.iloc[7, 8]
 
 
 df = df[["geometry", "Year", "Jurisdiction", "Management", "Tonnes"]]
@@ -91,6 +91,8 @@ gdf.crs = "EPSG:7844"
 
 gdf.to_crs(epsg=4326)
 gjson = gdf.__geo_interface__
+
+print(gdf)
 
 with open('States.geojson', 'w') as fp:
     json.dump(gjson, fp)

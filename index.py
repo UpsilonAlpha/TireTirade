@@ -42,8 +42,8 @@ document.getElementById("button").addEventListener("click", function_proxy)
 '''
 
 #Where do degraded tires go?
-bar = px.bar(tire_data, x="System", y="Tonnes", template=template,title="Where do tire microplastics enter the environment?")
-bar.update_layout(title_x=0.5, error_y=dict(type='percent', value=10, visible=True))
+bar = go.Figure([go.Bar(x=tire_data["System"], y=tire_data["Tonnes"], error_y=dict(type='percent', value=10, visible=True))])
+bar.update_layout(title_x=0.5,title="Where do tire microplastics enter the environment?")
 Plotly.react('bar', JSON.parse(bar.to_json()))
 
 #What is the average car tyre made of?
