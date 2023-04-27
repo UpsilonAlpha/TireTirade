@@ -1,10 +1,10 @@
 ﻿System,Tonnes,Parent,Materials,Kilograms,Method,FSI,Capacity,Emissions
-Soil,5871,,Tire,0,Car,2805,1500,96
-Air,1040,Tire,Rubber,0,Bus,35,5000,105
-Rivers,1043,Rubber,Synthetic,2.1995,Tram,25,1800,35
-Sewage,814,Rubber,Natural,1.6575,Train,11,60000,41
-,,Tire,Protection,0,Bike,427,12000,2
-,,Protection,Antioxidants,0.256117647,On foot,565,15000,1
+Soil,5871,,Tire,0,Car,2805,15,96
+Air,1040,Tire,Rubber,0,Bus,35,50,105
+Rivers,1043,Rubber,Synthetic,2.1995,Train,11,600,41
+Sewage,814,Rubber,Natural,1.6575,Bike,427,120,0
+,,Tire,Protection,0,On foot,565,150,0
+,,Protection,Antioxidants,0.256117647,,,,
 ,,Protection,Antiozonants,0.365882353,,,,
 ,,Tire,Hardeners,0,,,,
 ,,Hardeners,Stearic acid,0.088,,,,

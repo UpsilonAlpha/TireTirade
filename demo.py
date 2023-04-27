@@ -13,7 +13,7 @@ from scipy.fftpack import fft
 from scipy.io import wavfile
 
 MAPBOX_ACESSTOKEN = "pk.eyJ1IjoiZm9yc3dvcm4iLCJhIjoiY2xnd2NpemVpMmt2bzNsbGg5ZHdtcDdqbCJ9.71Qy9AEmPQd48pDPbJ4quw"
-'''
+
 df = pd.read_csv("TireRecycling.csv")
 df = df[["Year", "Jurisdiction", "Type", "Stream", "Management", "Tonnes"]]
 df = df[df["Type"] == "Tyres (T140)"]
@@ -95,7 +95,7 @@ print(gdf)
 with open('PercentStates.geojson', 'w') as fp:
     json.dump(gjson, fp)
 
-'''
+
 df = pd.read_csv("CleanRecycling.csv")
 print(df)
 
@@ -141,7 +141,11 @@ chloropleth.update_layout(
 
 chloropleth.show()
 area.show()
-'''
+
+
+
+
+
 fs, new = wavfile.read("RoadNoise.wav")
 fs, old = wavfile.read("RoadNoise.wav")
 a = wav.T[0]
