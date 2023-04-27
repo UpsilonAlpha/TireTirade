@@ -83,7 +83,7 @@ Plotly.react('fourier', JSON.parse(fourier.to_json()))
 
 
 
-chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color=recycling["Tonnes"], animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
+chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
 chloropleth.update_geos(fitbounds="locations")
 
 chloropleth.update_layout(
@@ -119,3 +119,7 @@ Plotly.react('chloropleth', JSON.parse(chloropleth.to_json()))
 area = px.area(landfill, y="Tonnes", x="Year", color="Jurisdiction")
 
 Plotly.react('area', JSON.parse(area.to_json()))
+
+scatter = px.scatter(tire_data, x="Emissions", y="FSI", size="Capacity", labels="Method")
+
+Plotly.react('scatter', JSON.parse(scatter.to_json()))
