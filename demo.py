@@ -10,9 +10,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from shapely import wkt
 
 MAPBOX_ACESSTOKEN = "pk.eyJ1IjoiZm9yc3dvcm4iLCJhIjoiY2xnd2NpemVpMmt2bzNsbGg5ZHdtcDdqbCJ9.71Qy9AEmPQd48pDPbJ4quw"
-
-
-
+'''
 df = pd.read_csv("TireRecycling.csv")
 df = df[["Year", "Jurisdiction", "Type", "Stream", "Management", "Tonnes"]]
 df = df[df["Type"] == "Tyres (T140)"]
@@ -30,7 +28,8 @@ print(df['Year'])
 df['Year'] = df['Year'].apply(pd.to_numeric)
 
 df = df[df["Year"]>2009]
-'''
+df = df[["Year", "Jurisdiction", "Management", "Tonnes"]]
+
 recycled = df[df["Management"] == "Recycling"]
 burned = df[df["Management"] == "Energy from waste facility"]
 landfill = df[df["Management"] == "Landfill"]
@@ -39,7 +38,6 @@ percent_recycled = ((recycled["Tonnes"].values)/(recycled["Tonnes"].values + bur
 percent_burned = ((burned["Tonnes"].values)/(recycled["Tonnes"].values + burned["Tonnes"].values+landfill["Tonnes"].values))*100
 percent_landfill = ((landfill["Tonnes"].values)/(recycled["Tonnes"].values + burned["Tonnes"].values+landfill["Tonnes"].values))*100
 
-
 recycled["Tonnes"] = percent_recycled
 burned["Tonnes"] = percent_burned
 landfill["Tonnes"] = percent_landfill
@@ -47,41 +45,37 @@ landfill["Tonnes"] = percent_landfill
 df[df["Management"] == "Recycling"] = recycled
 df[df["Management"] == "Energy from waste facility"] = burned
 df[df["Management"] == "Landfill"] = landfill
-'''
+
+print(df)
 df.to_csv("CleanRecycling.csv")
 
-'''
-line = px.line(df[df["Management"]=="Recycling"], y="Tonnes", x="Year", color="Jurisdiction" )
-line.show()
-
 df = pd.read_csv("PercentRecycling.csv")
-'''
-
+line = px.line(df[df["Management"]=="Landfill"], y="Tonnes", x="Year", color="Jurisdiction" )
+line.show()
 df["geometry"] = gpd.GeoSeries()
+df = df[["geometry", "Year", "Jurisdiction", "Management", "Tonnes"]]
 states = gpd.read_file("STE_2021_AUST_GDA2020.shp")
-print(df)
+
 for i in range(len(df["Jurisdiction"])):
     
-    match df.iloc[i,1]:
+    match df.iloc[i,2]:
         case "NSW":
-            df.iloc[i, 6] = states.iloc[0, 8]
+            df.iloc[i, 0] = states.iloc[0, 8]
         case "Vic":
-            df.iloc[i, 6] = states.iloc[1, 8]
+            df.iloc[i, 0] = states.iloc[1, 8]
         case "Qld":
-            df.iloc[i, 6] = states.iloc[2, 8]
+            df.iloc[i, 0] = states.iloc[2, 8]
         case "SA":
-            df.iloc[i, 6] = states.iloc[3, 8]
+            df.iloc[i, 0] = states.iloc[3, 8]
         case "WA":
-            df.iloc[i, 6] = states.iloc[4, 8]
+            df.iloc[i, 0] = states.iloc[4, 8]
         case "Tas":
-            df.iloc[i, 6] = states.iloc[5, 8]
+            df.iloc[i, 0] = states.iloc[5, 8]
         case "NT":
-            df.iloc[i, 6] = states.iloc[6, 8]
+            df.iloc[i, 0] = states.iloc[6, 8]
         case "ACT":
-            df.iloc[i, 6] = states.iloc[7, 8]
+            df.iloc[i, 0] = states.iloc[7, 8]
 
-
-df = df[["geometry", "Year", "Jurisdiction", "Management", "Tonnes"]]
 
 
 
@@ -94,14 +88,55 @@ gjson = gdf.__geo_interface__
 
 print(gdf)
 
-with open('States.geojson', 'w') as fp:
+with open('PercentStates.geojson', 'w') as fp:
     json.dump(gjson, fp)
+
 '''
+df = pd.read_csv("CleanRecycling.csv")
+print(df)
 with open ("States.geojson",'r') as infile:
     gjson = json.load(infile)
 
+recycling = df[df["Management"]=="Recycling"]
+burned = df[df["Management"]=="Energy from waste facility"]
+landfill = df[df["Management"]=="Landfill"]
+
+chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
+chloropleth.update_geos(fitbounds="locations")
+area = px.area(recycling, y="Tonnes", x="Year", color="Jurisdiction")
+
+chloropleth.update_layout(
+    updatemenus=[
+        dict(
+            type = "buttons",
+            direction = "left",
+            active= -1,
+            buttons=list([
+                dict(
+                    args=[{"visible": [True,False]}, {"type":"choropleth"}],
+                    label="Choropleth",
+                    method="update"
+                ),
+                dict(
+                    args=[{"visible": [False,True]}, {"type":"area"}],
+                    label="Area",
+                    method="update"
+                )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            x=0.11,
+            xanchor="left",
+            y=1.1,
+            yanchor="top"
+        ),
+    ]
+)
 
 
+chloropleth.show()
+area.show()
+'''
 fs, wav = wavfile.read("RoadNoise.wav")
 a = wav.T[0]
 

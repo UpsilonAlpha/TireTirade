@@ -12,7 +12,7 @@ tire_data = pd.read_csv(open_url(url1))
 url2 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/RoadNoise.csv")
 road_noise = pd.read_csv(open_url(url2))
 
-url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/CleanRecycling.csv")
+url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
 df = pd.read_csv(open_url(url3))
 
 url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
@@ -80,7 +80,7 @@ Plotly.react('fourier', JSON.parse(fourier.to_json()))
 recycling = df[df["Management"]=="Recycling"]
 burned = df[df["Management"]=="Energy from waste facility"]
 landfill = df[df["Management"]=="Landfill"]
-chloropleth = px.choropleth(df, geojson=gjson, locations = recycling.index, color=recycling["Tonnes"], animation_frame=recycling["Year"], center=dict(lat=-26.5 , lon=135.5))
+chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5))
 chloropleth.update_geos(fitbounds="locations")
 
 chloropleth.update_layout(
@@ -88,16 +88,17 @@ chloropleth.update_layout(
         dict(
             type = "buttons",
             direction = "left",
+            active= -1,
             buttons=list([
                 dict(
-                    args=["color", recycling["Tonnes"]],
-                    label="Recycling",
-                    method="restyle"
+                    args=[{"visible": [True,False]}, {"type":"choropleth"}],
+                    label="Choropleth",
+                    method="update"
                 ),
                 dict(
-                    args=["color", landfill["Tonnes"]],
-                    label="Landfill",
-                    method="restyle"
+                    args=[{"visible": [False,True]}, {"type":"area"}],
+                    label="Area",
+                    method="update"
                 )
             ]),
             pad={"r": 10, "t": 10},
@@ -109,5 +110,4 @@ chloropleth.update_layout(
         ),
     ]
 )
-
 Plotly.react('chloropleth', JSON.parse(chloropleth.to_json()))
