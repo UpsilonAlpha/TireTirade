@@ -9,14 +9,20 @@ import urllib, json
 url1 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/TireData.csv")
 tire_data = pd.read_csv(open_url(url1))
 
-url2 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/RoadNoise.csv")
+url2 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/OldNoise.csv")
 road_noise = pd.read_csv(open_url(url2))
 
-url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
-df = pd.read_csv(open_url(url3))
+#url3 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/PercentRecycling.csv")
+#df = pd.read_csv(open_url(url3))
 
-url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
-gjson = json.loads(open_url(url4).getvalue())
+
+
+url4 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/CleanRecycling.csv")
+df = pd.read_csv(open_url(url4))
+recycling = df[df["Management"]=="Recycling"]
+landfill = df[df["Management"]=="Landfill"]
+url5 = ("https://raw.githubusercontent.com/UpsilonAlpha/TireTirade/main/States.geojson")
+gjson = json.loads(open_url(url5).getvalue())
 
 template = "plotly"
 
@@ -65,22 +71,20 @@ sankey.update_layout(title_text="How is energy lost from the transmisson of a ca
 
 Plotly.react('sankey', JSON.parse(sankey.to_json()))
 
-
+'''
 fourier = px.line(road_noise, x ="Frequencies", y="Values",animation_frame="Frames", log_x=True)
 fourier.update_layout(xaxis_title="Frequency (Hz)", yaxis_title="Relative Amplitude",yaxis_range=[0,1])
 fourier.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 666
 fourier.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 666
-fourier.update_layout(title_text="What does the noise profile of a car look like?", title_x=0.5, template=template, xaxis_title="Frequency (Hz)", yaxis_title="Amplitude (dB)")
+'''
+fourier = px.line(road_noise,x="Frequencies", y="Values",animation_frame="Type", log_x=True)
+fourier.update_layout(xaxis_title="Frequency (Hz)", yaxis_title="Relative Amplitude",yaxis_range=[0,1], title_x=0.5, template=template, title_text="What does the noise profile of cars with different tires look like?")
 Plotly.react('fourier', JSON.parse(fourier.to_json()))
 
 
 
 
-
-recycling = df[df["Management"]=="Recycling"]
-burned = df[df["Management"]=="Energy from waste facility"]
-landfill = df[df["Management"]=="Landfill"]
-chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5))
+chloropleth = px.choropleth(recycling, geojson=gjson, locations=recycling.index, color="Tonnes", animation_frame="Year", center=dict(lat=-26.5 , lon=135.5),color_continuous_midpoint=25000)
 chloropleth.update_geos(fitbounds="locations")
 
 chloropleth.update_layout(
@@ -111,3 +115,7 @@ chloropleth.update_layout(
     ]
 )
 Plotly.react('chloropleth', JSON.parse(chloropleth.to_json()))
+
+area = px.area(landfill, y="Landfill", x="Year", color="Jurisdiction")
+
+Plotly.react('area', JSON.parse(area.to_json()))

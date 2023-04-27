@@ -26,7 +26,7 @@
       <p>
         Tires are regularly undergoing abrasive friction with roads, leading to constant air and noise pollution. Furthermore at the end of their short lifecycle, they are disposed of, generating mountains of waste each day. However, the general public is mostly unaware of this impact. 
         
-        This has major consequences, however there are also various methods to help.
+        This has major consequences, however there are also various methods to mitigate these negative effects. This report covers different ways to understand the problems that tires have, as well as strategies have gone into mitigating it.
         <br><br><br>
       </p>
       
@@ -34,7 +34,7 @@
                     
 
       <p>
-        Humans as a species, throw out an estimated 1 billion tires in a year according to the World Business Council for Sustainable Development Managing End-of-Life Tires<sup>1</sup>. This number is difficult to comprehend and not useful for understanding the scope of the problem. However when interpolated using simple arithmetic you can obtain the much easier to grasp rate of approximately 32 tires every second. This visualization displays this rate using a physics simulation of 32 tires over a period of 3 seconds as a gif to convey the physical size and scope of the tire waste issue.
+        Humans as a species, throw out an estimated 1 billion tires in a year according to the World Business Council for Sustainable Development Managing End-of-Life Tires<sup>1</sup>. This number is difficult to comprehend and not useful for understanding the scope of the problem. However for the sake of understanding this rate can be interpolated to obtain the much easier to grasp statistic, of approximately 32 tires per second. 
       </p>
       <br>
       <center>
@@ -43,14 +43,16 @@
       </center>
       <br>
       <p>
-          Luckily, there are lots of companies working on recycling end of life tires (ELTs)<sup>2</sup>. In Australia, government and industry have collaborated to make great strides in recycling ELTs. This is why the rate of recycling has drastically increased since 2017 as can be seen in data from the national waste database in 2022<sup>3</sup>.
+          Luckily, there are companies and agencies working on recycling end of life tires (ELTs)<sup>2</sup>. In Australia, government and industry have collaborated to make great strides in recycling ELTs. This is why the rate of recycling has drastically increased since 2017 as can be seen in data from the national waste database in 2022<sup>3</sup>. This data was cleaned by removing commas and converting numerical data into usable values. Then a subset was selected from 2012 to 2021.
           
         <br><br><br>
         <div id="chloropleth"></div>
-        <center><i>Figure 2: Chloropleth map of the amount of tires going into landfill in each Australian state over time.</i></center>
+        <center><i>Figure 2: Chloropleth map of the amount of tire waste in tonnes being recycled in each Australian state over time.</i></center>
+        <div id="area"></div>
+        <center><i>Figure 3: Stacked line graph of the percentage of tire waste going to landfill in each Australian state over time.</i></center>
         <br><br><br>
         
-        As can be seen, there is a drastic decrease in the amount of ELTs going into landfill between 2017 and 2018 due to a push by federal government policy<sup>2</sup>. This has greaty reduced the environmental impact of end of life tires by preventing microplastics entering the environment.
+        As can be seen, there is a drastic decrease in the amount of ELTs being recycled between 2017 and 2018 due to a push by federal government policy<sup>2</sup>. This corresponds with a decrease in tires entering landfill as can be seen in <i>Figure 3</i> This has greaty reduced the environmental impact of end of life tires by preventing microplastics entering the environment.
           
         However, recycling only occurs on what’s left of the tire after it’s been used. In a best case scenario 80% of the tire tread has been removed before the tyres are replaced<sup>4</sup>. So where did all that extra material go? A 2022 study on concentrations of tire wear microplastics and other traffic-derived non-exhaust particles in the road environment discovered the pathways by which the majority of tire microplastics enter the environment.
           
@@ -58,19 +60,19 @@
       </p>
       <br>    
       <div id="bar"></div>
-      <center><i>Figure 3: Bar chart of the tonnes of microplastics entering soil, water, air and sewage systems.</i></center>
+      <center><i>Figure 4: Bar chart of the tonnes of microplastics entering soil, water, air and sewage systems.</i></center>
       <br>
       <p>
-      What do these microplastics consist of? A typical passenger tire is composed of over 30 different types of ingredients<sup>6</sup>. This is difficult to list or display intuitively. Therefore a sunburst chart was used to convey the proportions of ingredients that go into making a tire.
+      What do these microplastics consist of? A typical passenger tire is composed of over 30 different types of ingredients<sup>6</sup>. This is difficult to list or display intuitively. Therefore a sunburst chart was used to convey the proportions of ingredients that go into making a tire. This data was gathered from a meta-analysis on studies into the composition of an average car tyre.
     <br><br><br>
       </p>
     <center>
       <div id="pie"></div>
-      <i>Figure 4: Sunburst chart of the different proportion of ingredients going into the average tire.</i>
+      <i>Figure 5: Sunburst chart of the different proportion of ingredients going into the average tire.</i>
       <p>(click for more detail)</p>
     </center>    
     <br><br><br>
-    <p>Clicking on this chart lets one focus on the proportions of a specific type of material. Furhtermore, hovering over sections outputs the total weight (in kilograms) of that ingredient present in the average tire. This compacts a lot of categorical data intuitively into a small area.</p>
+    <p>Clicking on this chart lets one focus on the proportions of a specific type of material. Furhtermore, hovering over sections outputs the total weight (in kilograms) of that ingredient present in the average tire. This compacts a lot of categorical and numerical data intuitively into a small area.</p>
 
       <h2>Part 2: Efficiency</h2>
       <p>
@@ -78,28 +80,49 @@
 
         The static friction of tires make cars great at starting and stopping, but there’s a downside. When they are in motion they generate a whole lot of friction, slowing them down. This is kinetic friction also known as “rolling resistance” and this friction uses up energy that is then wasted as heat and noise<sup>9</sup>.
 
-        The average engine is about 40% efficient. Pretty terrible already. When driving however, up to a quarter of the energy that makes it to the wheels is used then used up because of tires<sup>9</sup>, which means electric cars aren’t immune to this either. The range listed on brand new electric cars were likely calculated using ultra-low rolling resistance tires in ideal conditions. The electricity wasted by tires could be used to decarbonise other sectors of the economy, but right now all this extra energy and by extension CO2 is wasted as heat and noise pollution.
+        The average engine is about 40% efficient. When driving however, up to half of the energy that makes it to the wheels is used then used up because of tires<sup>9</sup>, which means electric cars aren’t immune to this either. The electricity wasted by tires could be used to decarbonise other sectors of the economy, but right now all this extra energy and by extension CO2 is wasted as heat and noise pollution from tyres.
       </p>
     <div id="sankey"></div>
+    <i>Figure 6: Sankey diagram of different ways energy is lost after reaching the trasmission</i>
     <br><br><br>
-    <p>This diagram shows the flow of energy once it makes it to the wheels which applies for both combustion and electric cars. This model was made by the Australian National University, as a model fo how energy is spent in a car. This gives a nice visual representation of how much energy is lost via drag and rolling resistance compared to something familiar like braking.</p>
+    <p>This diagram shows the flow of energy once it makes it to the wheels which applies for both combustion and electric cars. The data was gathered from the Australian National University, from a model of how energy is spent in a car. This gives a visual representation of how much energy is lost via drag and rolling resistance compared to something more familiar like air resistance and braking.</p>
     <h2>Part 3: Noise</h2>
     <p>
-Most people would assume the engine is the loudest part of a car. In fact, one of the big selling points for electric cars is how quiet they are but- the noise is the same to everyone else outside of a soundproofed vehicle. The rolling noise of the tires becomes louder than the propulsion noise of the engine at speeds over 55kmph. So, most of the time it’s the tires that are to blame for why cars are loud.
+Most people would assume the engine is the loudest part of a car. In fact, one of the big selling points for electric cars is how quiet they are. However, noise levels are very similar outside of a soundproofed vehicle. The rolling noise of the tires becomes louder than the the engine at speeds over 30kmph. So, most of the time it’s the tires that are to blame for why cars are loud.
 
-Believe it or not, this used to be a much bigger problem in the past. That’s because this regular pattern of treads causes the tires to make noise at the same frequency and it was unbearably loud. In order to solve this, the brand-new field of pitch sequence engineering was born. Engineers experimented with different patterns, to take that single loud peak of noise, and distribute it across different frequencies. So modern tires are specifically designed to make white noise.
-
+Believe it or not, this used to be a much bigger problem in the past, when tires used to make a high frequency hum.
+<br><br>
+<audio controls>
+  <source src="https://github.com/UpsilonAlpha/TireTirade/blob/main/OldNoise.wav?raw=true" type="audio/wav">
+</audio>
+<br><br>
+That’s because this regular pattern of treads causes the tires to make noise at the same frequency and it was unbearably loud. In order to solve this, the brand-new field of pitch sequence engineering was born. Engineers experimented with different patterns, to take that single loud peak of noise, and distribute it across different frequencies. So modern tires are specifically designed to make white noise.
+<br><br>
+<audio controls>
+  <source src="https://github.com/UpsilonAlpha/TireTirade/blob/main/RoadNoise.wav?raw=true" type="audio/wav">
+</audio>
+<br><br>
 Unfortunately, this second type of noise can be seriously detrimental to health. It causes sleep disturbances and might be the reason why you’re always tired. It’s also been shown to increase anxiety, especially in children. Because of these stress-altering effect tire noise has also significantly increased the rate of chronic heart failure, the number 1 killer of humans.
 
-So, while modern tires are less loud, the total amount of noise energy being produced is still the same. The same amount of energy is wasted, and the same amount of pollution is sprayed into the environment.
-
+So, while modern tires are less loud, they can still have serious negative health effects.
     </p>
-    <audio controls>
-      <source src="https://github.com/UpsilonAlpha/TireTirade/blob/main/RoadNoise.wav?raw=true" type="audio/wav">
-    </audio>
 
     <div id="fourier"></div>
 <br><br><br>
+
+<h2>A Tireless Future?</h2>
+
+While it may seem like tyres are here to stay, there are still many ohter ways to minimize their negative impacts. One alternative is more frequent use of rail transport. Railway lines don't shed microplastics are they are made using mostly only steel, wood and concrete. Unlike roads they’re also extremely resistant to degradation, lasting many decades on average. Rail infrastructure can also be more easily recycled compared to tyres.
+
+They are also far more efficient in terms of rollign resistance as steel on steel has one of the lowest friction coefficients of any material.
+
+Furthermore, rail corridors and tram tracks stay quiet in between stops, so they don’t produce harmful noise either. Trains also encourage walking for short distances in places like cities, further reducing car use.
+
+Bikes also use tires, but they’re still a far better alternative to cars as tyres are smaller and under less mechanical load. Bike infrastructure is also cheaper and riding is much more energy efficient. Buses are also viable because they use fewer tires to transport far more people.
+
+A final benefit is that all these forms of transport are safer than cars by a wide margin as can be seen below.
+
+We won’t be able to eliminate tires completely, but we can be better, using the technology we already have.
 
 <h2>References</h2>
 <ol>
@@ -110,6 +133,8 @@ So, while modern tires are less loud, the total amount of noise energy being pro
   <li>Kole, P. J., Löhr, A. J., Van Belleghem, F., & Ragas, A. (2017). Wear and Tear of Tyres: A Stealthy Source of Microplastics in the Environment. International Journal of Environmental Research and Public Health, 14(10), 1265. https://doi.org/10.3390/ijerph14101265</li>
   <li>Järlskog, I., Jaramillo-Vogel, D., Rausch, J., Gustafsson, M., Strömvall, A.-M., & Andersson-Sköld, Y. (2022). Concentrations of tire wear microplastics and other traffic-derived non-exhaust particles in the road environment. Environment International, 170, 107618. https://doi.org/10.1016/j.envint.2022.107618</li>
   <li>Dong, Y., Zhao, Y., Hossain, Md. U., He, Y., & Liu, P. (2021). Life cycle assessment of vehicle tires: A systematic review. Cleaner Environmental Systems, 2, 100033. https://doi.org/10.1016/j.cesys.2021.100033</li>
+  <li>Tyre & Road traffic noise Where we should look for road traffic noise improvements. (2021). https://www.etrma.org/wp-content/uploads/2022/01/ETRMA-Tyre-Road-Traffic-Noise_2022.pdf</li>
+  <li>High Quality Sound Effects [1920s American Car Steady Out]. (n.d.). Www.youtube.com. Retrieved April 27, 2023, from https://www.youtube.com/watch?v=FK9_ThXby0Q&list=PL0A6yZXF_bxrc1pUfulZQ8u7uNw4adzlj&index=1</li>
   <li>How long does a road surface last? | Knowledge Hub | BituChem. (2021, January 18). Bituchem. https://www.bituchem.com/knowledge-hub/how-long-does-a-road-surface-last/</li>
   <li>StackPath. (n.d.). Www.forconstructionpros.com. https://www.forconstructionpros.com/asphalt/news/21072106/study-2314-billion-per-year-needed-to-repair-maintain-us-roads#:~:text=Study%3A%20%24231.4%20Billion%20Per%20Year%20Needed%20to%20Repair%2C%20Maintain%20US%20Roads</li>
   <li>Analysis of an Electric Vehicle System Optimising the electrical vehicle system in order improve adoption rates among consumers. (2015). https://users.cecs.anu.edu.au/~u3951377/student_work/example_work/15_2226_lp_areeb.pdf</li>

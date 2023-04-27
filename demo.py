@@ -8,9 +8,12 @@ import pyproj
 import json
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from shapely import wkt
+import scipy.signal as sig
+from scipy.fftpack import fft
+from scipy.io import wavfile
 
 MAPBOX_ACESSTOKEN = "pk.eyJ1IjoiZm9yc3dvcm4iLCJhIjoiY2xnd2NpemVpMmt2bzNsbGg5ZHdtcDdqbCJ9.71Qy9AEmPQd48pDPbJ4quw"
-'''
+
 df = pd.read_csv("TireRecycling.csv")
 df = df[["Year", "Jurisdiction", "Type", "Stream", "Management", "Tonnes"]]
 df = df[df["Type"] == "Tyres (T140)"]
@@ -27,7 +30,7 @@ for i in range(len(df["Year"])):
 print(df['Year'])
 df['Year'] = df['Year'].apply(pd.to_numeric)
 
-df = df[df["Year"]>2009]
+df = df[df["Year"]>2011]
 df = df[["Year", "Jurisdiction", "Management", "Tonnes"]]
 
 recycled = df[df["Management"] == "Recycling"]
@@ -49,6 +52,7 @@ df[df["Management"] == "Landfill"] = landfill
 print(df)
 df.to_csv("CleanRecycling.csv")
 
+'''
 df = pd.read_csv("PercentRecycling.csv")
 line = px.line(df[df["Management"]=="Landfill"], y="Tonnes", x="Year", color="Jurisdiction" )
 line.show()
@@ -91,7 +95,7 @@ print(gdf)
 with open('PercentStates.geojson', 'w') as fp:
     json.dump(gjson, fp)
 
-'''
+
 df = pd.read_csv("CleanRecycling.csv")
 print(df)
 with open ("States.geojson",'r') as infile:
@@ -136,8 +140,9 @@ chloropleth.update_layout(
 
 chloropleth.show()
 area.show()
-'''
-fs, wav = wavfile.read("RoadNoise.wav")
+
+fs, new = wavfile.read("RoadNoise.wav")
+fs, old = wavfile.read("RoadNoise.wav")
 a = wav.T[0]
 
 b = fft(a) # calculate fourier transform (complex numbers list)
@@ -208,3 +213,46 @@ fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 666
 #fig = go.Figure(go.Scatter(y=c.iloc[:,1]), log_x=True)
 fig.show()
 '''
+
+
+
+fs1, old = wavfile.read("RoadNoise.wav")
+fs2, new = wavfile.read("OldNoise.wav")
+
+a1 = old.T[0]
+a2 = new.T[0]
+
+
+b1 = fft(a1) 
+b2 = fft(a2) 
+
+b1 = b1[0:293342]
+
+
+freqs = []
+e = []
+frames = []
+
+
+d1 = np.abs(b1[:int(len(b1)/2)-1])
+d2 = np.abs(b2[:int(len(b2)/2)-1])
+d1 = sig.savgol_filter(d1, 100, 3)
+d2 = sig.savgol_filter(d2, 100, 3)
+for x in np.abs(d1[:int(len(d1/2)-1)]):
+    e.append(x/25000000)
+    frames.append("1920s Tires")
+for x in np.abs(d2[:int(len(d2/2)-1)]):
+    e.append(x/25000000)
+    frames.append("Modern Tires")
+for num in range(1,146670):
+    freqs.append(num)
+for num in range(1,146670):
+    freqs.append(num)
+
+c=pd.DataFrame(range(0,293338))
+c.insert(0, "Frequencies", freqs)
+c.insert(1, "Type", frames)
+c.insert(2, "Values", e)
+
+c.to_csv("OldNoise.csv")
+print(c)
